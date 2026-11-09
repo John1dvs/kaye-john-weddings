@@ -1,1 +1,18 @@
-
+{
+  "name": "Kaye & John Wedding Planner",
+  "short_name": "K&J Planner",
+  "description": "Our private wedding planner",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#faf6ef",
+  "theme_color": "#b77c79",
+  "icons": [
+    {
+      "src": "kaye-john-wedding-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
