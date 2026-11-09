@@ -1,247 +1,265 @@
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaye & John | Private Wedding Planner</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="kaye-john-wedding-icon.png">
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaye & John | Private Wedding Planner</title>
 
-    <div id="loginScreen" class="login-screen">
-    <form id="loginForm" class="login-card">
-        <span class="small-title">KAYE & JOHN · PRIVATE SPACE</span>
-        <h1>Welcome Back ♡</h1>
-        <p>Sign in to continue planning your forever.</p>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="kaye-john-wedding-icon.png">
 
-        <label for="loginEmail">Email address</label>
-        <input id="loginEmail" type="email" autocomplete="username" required>
+<!-- PWA SETTINGS -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#b77c79">
+<meta name="description" content="Kaye & John Private Wedding Planner">
 
-        <label for="loginPassword">Password</label>
-        <input id="loginPassword" type="password" autocomplete="current-password" required>
+</head>
+<body>
 
-        <button class="add-button" type="submit">Sign In</button>
-        <p id="loginMessage" class="login-message" role="status"></p>
+<div id="loginScreen" class="login-screen">
+<form id="loginForm" class="login-card">
+    <span class="small-title">KAYE & JOHN · PRIVATE SPACE</span>
+    <h1>Welcome Back ♡</h1>
+    <p>Sign in to continue planning your forever.</p>
+
+    <label for="loginEmail">Email address</label>
+    <input id="loginEmail" type="email" autocomplete="username" required>
+
+    <label for="loginPassword">Password</label>
+    <input id="loginPassword" type="password" autocomplete="current-password" required>
+
+    <button class="add-button" type="submit">Sign In</button>
+    <p id="loginMessage" class="login-message" role="status"></p>
+</form>
+</div>
+
+<div id="plannerApp" hidden>
+<header class="hero">
+<div class="hero-content">
+    <span class="small-title">THE BEGINNING OF FOREVER</span>
+    <h1>Kaye <span>&</span> John</h1>
+    <p>Our Wedding Planning Journal</p>
+    <div class="hero-line"></div>
+    <span class="wedding-date">JULY 23, 2035 · BEACH WEDDING</span>
+</div>
+<button id="logoutButton" class="logout-button">Sign Out</button>
+</header>
+
+<nav class="navigation">
+<a href="#dashboard" class="nav-link active">Home</a>
+<a href="#guests" class="nav-link">Guest List</a>
+<a href="#budget" class="nav-link">Budget</a>
+<a href="#checklist" class="nav-link">Checklist</a>
+<a href="#journal" class="nav-link">Journal</a>
+<a href="#saved-journals" class="nav-link">Saved Journals</a>
+<a href="#suppliers" class="nav-link">Suppliers</a>
+</nav>
+
+<main class="container">
+
+<section id="dashboard" class="planner-section active welcome-card">
+<span class="small-title">OUR JOURNEY TO FOREVER</span>
+<h2>Every detail, a beautiful memory.</h2>
+<p>Planning our dream day, one little detail at a time.</p>
+</section>
+
+<section class="planner-section active overview">
+<div class="section-heading">
+    <span class="small-title">THE DETAILS</span>
+    <h2>Wedding Overview</h2>
+</div>
+<div class="overview-grid">
+    <div class="info-card"><span>♡</span><p>Wedding Date</p><h3>July 23, 2035</h3></div>
+    <div class="info-card"><span>☼</span><p>Wedding Theme</p><h3>Beach Wedding</h3></div>
+    <div class="info-card"><span>⌖</span><p>Venue</p><h3>To be confirmed</h3></div>
+    <div class="info-card"><span>✧</span><p>Our Progress</p><h3 id="progressLabel">Just Beginning</h3></div>
+</div>
+</section>
+
+<section id="guests" class="planner-section">
+<div class="section-heading">
+    <span class="small-title">OUR FAVORITE PEOPLE</span>
+    <h2>Wedding Guest List</h2>
+    <p>Surrounded by the people we love.</p>
+</div>
+<div class="guest-panel">
+    <form id="guestForm" class="guest-form">
+    <div class="form-field">
+        <label for="guestName">Guest Name</label>
+        <input id="guestName" required placeholder="Enter guest's full name">
+    </div>
+    <div class="form-field">
+        <label for="guestStatus">Attendance Status</label>
+        <select id="guestStatus">
+        <option>Invited</option>
+        <option>Confirmed</option>
+        <option>Declined</option>
+        </select>
+    </div>
+    <button class="add-button">+ Add Guest</button>
     </form>
+
+    <div class="guest-summary">
+    <div class="summary-item"><span>Total Guests</span><strong id="totalGuests">0</strong></div>
+    <div class="summary-item"><span>Confirmed</span><strong id="confirmedGuests">0</strong></div>
+    <div class="summary-item"><span>Declined</span><strong id="declinedGuests">0</strong></div>
     </div>
 
-    <div id="plannerApp" hidden>
-    <header class="hero">
-    <div class="hero-content">
-        <span class="small-title">THE BEGINNING OF FOREVER</span>
-        <h1>Kaye <span>&</span> John</h1>
-        <p>Our Wedding Planning Journal</p>
-        <div class="hero-line"></div>
-        <span class="wedding-date">JULY 23, 2035 · BEACH WEDDING</span>
+    <div class="table-container">
+    <table>
+        <thead><tr><th>Guest Name</th><th>Attendance</th><th>Action</th></tr></thead>
+        <tbody id="guestList"></tbody>
+    </table>
     </div>
-    <button id="logoutButton" class="logout-button">Sign Out</button>
-    </header>
+</div>
+</section>
 
-    <nav class="navigation">
-    <a href="#dashboard" class="nav-link active">Home</a>
-    <a href="#guests" class="nav-link">Guest List</a>
-    <a href="#budget" class="nav-link">Budget</a>
-    <a href="#checklist" class="nav-link">Checklist</a>
-    <a href="#journal" class="nav-link">Journal</a>
-    <a href="#saved-journals" class="nav-link">Saved Journals</a>
-    <a href="#suppliers" class="nav-link">Suppliers</a>
-    </nav>
-
-    <main class="container">
-
-    <section id="dashboard" class="planner-section active welcome-card">
-    <span class="small-title">OUR JOURNEY TO FOREVER</span>
-    <h2>Every detail, a beautiful memory.</h2>
-    <p>Planning our dream day, one little detail at a time.</p>
-    </section>
-
-    <section class="planner-section active overview">
-    <div class="section-heading">
-        <span class="small-title">THE DETAILS</span>
-        <h2>Wedding Overview</h2>
+<section id="budget" class="planner-section">
+<div class="section-heading">
+    <span class="small-title">OUR WEDDING EXPENSES</span>
+    <h2>Wedding Budget Tracker</h2>
+    <p>Every little detail, thoughtfully budgeted.</p>
+</div>
+<div class="budget-panel">
+    <div class="budget-input">
+    <label for="totalBudget">Total Wedding Budget (₱)</label>
+    <input id="totalBudget" type="number" min="0" step=".01" placeholder="Enter your budget">
     </div>
-    <div class="overview-grid">
-        <div class="info-card"><span>♡</span><p>Wedding Date</p><h3>July 23, 2035</h3></div>
-        <div class="info-card"><span>☼</span><p>Wedding Theme</p><h3>Beach Wedding</h3></div>
-        <div class="info-card"><span>⌖</span><p>Venue</p><h3>To be confirmed</h3></div>
-        <div class="info-card"><span>✧</span><p>Our Progress</p><h3 id="progressLabel">Just Beginning</h3></div>
+
+    <div class="budget-summary">
+    <div class="budget-box"><span>Total Budget</span><strong id="budgetAmount">₱0.00</strong></div>
+    <div class="budget-box"><span>Total Expenses</span><strong id="expenseAmount">₱0.00</strong></div>
+    <div class="budget-box"><span>Remaining</span><strong id="remainingAmount">₱0.00</strong></div>
     </div>
-    </section>
 
-    <section id="guests" class="planner-section">
-    <div class="section-heading">
-        <span class="small-title">OUR FAVORITE PEOPLE</span>
-        <h2>Wedding Guest List</h2>
-        <p>Surrounded by the people we love.</p>
+    <h3 class="budget-subtitle">Add an Expense</h3>
+    <form id="expenseForm" class="expense-form">
+    <div class="form-field">
+        <label for="expenseName">Expense Name</label>
+        <input id="expenseName" required placeholder="e.g. Wedding Dress">
     </div>
-    <div class="guest-panel">
-        <form id="guestForm" class="guest-form">
-        <div class="form-field">
-            <label for="guestName">Guest Name</label>
-            <input id="guestName" required placeholder="Enter guest's full name">
-        </div>
-        <div class="form-field">
-            <label for="guestStatus">Attendance Status</label>
-            <select id="guestStatus">
-            <option>Invited</option>
-            <option>Confirmed</option>
-            <option>Declined</option>
-            </select>
-        </div>
-        <button class="add-button">+ Add Guest</button>
-        </form>
+    <div class="form-field">
+        <label for="expenseCost">Amount (₱)</label>
+        <input id="expenseCost" type="number" min=".01" step=".01" required>
+    </div>
+    <button class="add-button">+ Add Expense</button>
+    </form>
 
-        <div class="guest-summary">
-        <div class="summary-item"><span>Total Guests</span><strong id="totalGuests">0</strong></div>
-        <div class="summary-item"><span>Confirmed</span><strong id="confirmedGuests">0</strong></div>
-        <div class="summary-item"><span>Declined</span><strong id="declinedGuests">0</strong></div>
-        </div>
-
-        <div class="table-container">
+    <div class="expense-history">
+    <h3>Our Expense History ♡</h3>
+    <div class="table-container">
         <table>
-            <thead><tr><th>Guest Name</th><th>Attendance</th><th>Action</th></tr></thead>
-            <tbody id="guestList"></tbody>
+        <thead><tr><th>Date</th><th>Expense Name</th><th>Amount</th><th>Action</th></tr></thead>
+        <tbody id="expenseList"></tbody>
         </table>
-        </div>
     </div>
-    </section>
+    </div>
+</div>
+</section>
 
-    <section id="budget" class="planner-section">
-    <div class="section-heading">
-        <span class="small-title">OUR WEDDING EXPENSES</span>
-        <h2>Wedding Budget Tracker</h2>
-        <p>Every little detail, thoughtfully budgeted.</p>
+<section id="checklist" class="planner-section">
+<div class="section-heading">
+    <span class="small-title">ONE STEP AT A TIME</span>
+    <h2>Our Wedding Checklist</h2>
+    <p>Little by little, everything will come together.</p>
+</div>
+<div class="budget-panel">
+    <form id="taskForm" class="expense-form">
+    <div class="form-field">
+        <label for="taskName">New Wedding Task</label>
+        <input id="taskName" required placeholder="e.g. Book the beach venue">
     </div>
-    <div class="budget-panel">
-        <div class="budget-input">
-        <label for="totalBudget">Total Wedding Budget (₱)</label>
-        <input id="totalBudget" type="number" min="0" step=".01" placeholder="Enter your budget">
-        </div>
+    <button class="add-button">+ Add Task</button>
+    </form>
+    <div class="guest-summary">
+    <div class="summary-item"><span>Total Tasks</span><strong id="totalTasks">0</strong></div>
+    <div class="summary-item"><span>Completed</span><strong id="completedTasks">0</strong></div>
+    <div class="summary-item"><span>Remaining</span><strong id="remainingTasks">0</strong></div>
+    </div>
+    <div id="taskList" class="task-list"></div>
+</div>
+</section>
 
-        <div class="budget-summary">
-        <div class="budget-box"><span>Total Budget</span><strong id="budgetAmount">₱0.00</strong></div>
-        <div class="budget-box"><span>Total Expenses</span><strong id="expenseAmount">₱0.00</strong></div>
-        <div class="budget-box"><span>Remaining</span><strong id="remainingAmount">₱0.00</strong></div>
-        </div>
+<section id="journal" class="planner-section">
+<div class="section-heading">
+    <span class="small-title">OUR LITTLE MEMORIES</span>
+    <h2>Our Wedding Journal</h2>
+    <p>Every thought and little detail becomes a memory.</p>
+</div>
+<div class="budget-panel journal-panel">
+    <div class="journal-header">
+    <span class="small-title">DEAR WEDDING DIARY</span>
+    <h3>Write Our Story ♡</h3>
+    </div>
+    <div class="form-field">
+    <label for="journalTitle">Journal Title</label>
+    <input id="journalTitle" placeholder="e.g. Our Beach Wedding Ideas">
+    </div>
+    <div class="form-field">
+    <label for="weddingNotes">Your Journal Entry</label>
+    <textarea id="weddingNotes" class="journal-textarea" rows="10" placeholder="Write your wedding ideas, inspirations, reminders, and dreams here..."></textarea>
+    </div>
+    <div class="journal-actions">
+    <p id="journalStatus" class="journal-hint">Your memories are waiting to be saved ♡</p>
+    <button type="button" id="saveJournal" class="add-button">♡ Save Journal</button>
+    </div>
+</div>
+</section>
 
-        <h3 class="budget-subtitle">Add an Expense</h3>
-        <form id="expenseForm" class="expense-form">
-        <div class="form-field">
-            <label for="expenseName">Expense Name</label>
-            <input id="expenseName" required placeholder="e.g. Wedding Dress">
-        </div>
-        <div class="form-field">
-            <label for="expenseCost">Amount (₱)</label>
-            <input id="expenseCost" type="number" min=".01" step=".01" required>
-        </div>
-        <button class="add-button">+ Add Expense</button>
-        </form>
+<section id="saved-journals" class="planner-section">
+<div class="section-heading">
+    <span class="small-title">OUR COLLECTION OF MEMORIES</span>
+    <h2>Our Saved Journals</h2>
+    <p>Every saved thought, plan, and memory in one place.</p>
+</div>
+<div class="budget-panel journal-panel">
+    <div id="savedJournalList" class="saved-journal-list"></div>
+</div>
+</section>
 
-        <div class="expense-history">
-        <h3>Our Expense History ♡</h3>
-        <div class="table-container">
-            <table>
-            <thead><tr><th>Date</th><th>Expense Name</th><th>Amount</th><th>Action</th></tr></thead>
-            <tbody id="expenseList"></tbody>
-            </table>
-        </div>
-        </div>
+<section id="suppliers" class="planner-section">
+<div class="section-heading">
+    <span class="small-title">THE PEOPLE BEHIND OUR DAY</span>
+    <h2>Our Wedding Suppliers</h2>
+    <p>Keep track of the people helping make our dream wedding happen.</p>
+</div>
+<div class="budget-panel">
+    <form id="supplierForm" class="expense-form">
+    <div class="form-field">
+        <label for="supplierName">Supplier / Business Name</label>
+        <input id="supplierName" required placeholder="e.g. Wedding Photographer">
     </div>
-    </section>
+    <div class="form-field">
+        <label for="supplierService">Service</label>
+        <input id="supplierService" required placeholder="e.g. Photography">
+    </div>
+    <button class="add-button">+ Add Supplier</button>
+    </form>
+    <div id="supplierList" class="task-list"></div>
+</div>
+</section>
 
-    <section id="checklist" class="planner-section">
-    <div class="section-heading">
-        <span class="small-title">ONE STEP AT A TIME</span>
-        <h2>Our Wedding Checklist</h2>
-        <p>Little by little, everything will come together.</p>
-    </div>
-    <div class="budget-panel">
-        <form id="taskForm" class="expense-form">
-        <div class="form-field">
-            <label for="taskName">New Wedding Task</label>
-            <input id="taskName" required placeholder="e.g. Book the beach venue">
-        </div>
-        <button class="add-button">+ Add Task</button>
-        </form>
-        <div class="guest-summary">
-        <div class="summary-item"><span>Total Tasks</span><strong id="totalTasks">0</strong></div>
-        <div class="summary-item"><span>Completed</span><strong id="completedTasks">0</strong></div>
-        <div class="summary-item"><span>Remaining</span><strong id="remainingTasks">0</strong></div>
-        </div>
-        <div id="taskList" class="task-list"></div>
-    </div>
-    </section>
+<footer>
+<p>Made with love, for our forever. ♡</p>
+<span>KAYE & JOHN · JULY 23, 2035</span>
+</footer>
 
-    <section id="journal" class="planner-section">
-    <div class="section-heading">
-        <span class="small-title">OUR LITTLE MEMORIES</span>
-        <h2>Our Wedding Journal</h2>
-        <p>Every thought and little detail becomes a memory.</p>
-    </div>
-    <div class="budget-panel journal-panel">
-        <div class="journal-header">
-        <span class="small-title">DEAR WEDDING DIARY</span>
-        <h3>Write Our Story ♡</h3>
-        </div>
-        <div class="form-field">
-        <label for="journalTitle">Journal Title</label>
-        <input id="journalTitle" placeholder="e.g. Our Beach Wedding Ideas">
-        </div>
-        <div class="form-field">
-        <label for="weddingNotes">Your Journal Entry</label>
-        <textarea id="weddingNotes" class="journal-textarea" rows="10" placeholder="Write your wedding ideas, inspirations, reminders, and dreams here..."></textarea>
-        </div>
-        <div class="journal-actions">
-        <p id="journalStatus" class="journal-hint">Your memories are waiting to be saved ♡</p>
-        <button type="button" id="saveJournal" class="add-button">♡ Save Journal</button>
-        </div>
-    </div>
-    </section>
+</main>
+</div>
 
-    <section id="saved-journals" class="planner-section">
-    <div class="section-heading">
-        <span class="small-title">OUR COLLECTION OF MEMORIES</span>
-        <h2>Our Saved Journals</h2>
-        <p>Every saved thought, plan, and memory in one place.</p>
-    </div>
-    <div class="budget-panel journal-panel">
-        <div id="savedJournalList" class="saved-journal-list"></div>
-    </div>
-    </section>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
 
-    <section id="suppliers" class="planner-section">
-    <div class="section-heading">
-        <span class="small-title">THE PEOPLE BEHIND OUR DAY</span>
-        <h2>Our Wedding Suppliers</h2>
-        <p>Keep track of the people helping make our dream wedding happen.</p>
-    </div>
-    <div class="budget-panel">
-        <form id="supplierForm" class="expense-form">
-        <div class="form-field">
-            <label for="supplierName">Supplier / Business Name</label>
-            <input id="supplierName" required placeholder="e.g. Wedding Photographer">
-        </div>
-        <div class="form-field">
-            <label for="supplierService">Service</label>
-            <input id="supplierService" required placeholder="e.g. Photography">
-        </div>
-        <button class="add-button">+ Add Supplier</button>
-        </form>
-        <div id="supplierList" class="task-list"></div>
-    </div>
-    </section>
+<!-- REGISTER SERVICE WORKER -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .catch((error) => console.error("Service Worker registration failed:", error));
+  });
+}
+</script>
 
-    <footer>
-    <p>Made with love, for our forever. ♡</p>
-    <span>KAYE & JOHN · JULY 23, 2035</span>
-    </footer>
-
-    </main>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
-    </body>
-    </html>
+</body>
+</html>
